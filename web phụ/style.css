@@ -1,0 +1,202 @@
+/* --- BIẾN MÀU SẮC CHỦ ĐẠO (Dễ dàng thay đổi sau này) --- */
+:root {
+    --mau-chu-dao: #00f2fe;       /* Màu Cyan Neon chính */
+    --mau-phu: #9b51e0;           /* Màu Tím mượt mà */
+    --nen-toi: #121420;           /* Màu nền tối sâu */
+    --nen-thanh-tren: #1a1d29;    /* Màu nền thanh trên */
+    --chu-chinh: #ffffff;         /* Chữ trắng chính */
+    --chu-mo: #a0aec0;            /* Chữ xám mờ cho nội dung phụ */
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--nen-toi);
+    color: var(--chu-chinh);
+}
+
+/* --- KHỐI CHỨA ẢNH CON MÈO --- */
+.nen {
+    width: 50vw;
+    height: 50vh;
+    background-image: url("anh/catt.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    background-color: #1e2235; /* Tạo một lớp nền nhẹ phía sau ảnh */
+    margin-bottom: 20px;
+}
+
+/* --- KHỐI NỘI DUNG CHÍNH --- */
+.noidung {
+    margin-top: 140px;
+    padding: 0 40px;
+}
+
+h1 {
+    font-size: 28px;
+    color: var(--mau-chu-dao);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+
+/* --- DANH SÁCH (BẢNG) --- */
+.bang {
+    list-style: none; /* Bỏ dấu chấm tròn mặc định cho đẹp */
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Định dạng chung cho các ô li */
+li {
+    color: var(--chu-chinh);
+    width: 250px; /* Tăng chiều rộng để chứa chữ vừa vặn hơn thay vì 70px bị vuông */
+    padding: 12px 20px;
+    border-radius: 8px;
+    background-color: #23273a;
+    border-left: 4px solid #4a5568; /* Thanh màu bên cạnh mặc định */
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+li:hover {
+    transform: translateX(10px); /* Hiệu ứng đẩy nhẹ khi di chuột vào */
+    box-shadow: 0 0 20px;
+}
+
+/* Custom riêng cho class .ka */
+.ka {
+    color: #00f2fe;
+    background-color: rgba(0, 242, 254, 0.1); /* Nền xanh nhạt trong suốt */
+    border-left: 4px solid var(--mau-chu-dao);
+}
+
+/* Custom riêng cho class .kb */
+.kb {
+    color: #e0aaff;
+    background-color: rgba(155, 81, 224, 0.15); /* Nền tím nhạt trong suốt */
+    border-left: 4px solid var(--mau-phu);
+}
+
+
+/* ==================== GIAO DIỆN THANH TRÊN & MENU ==================== */
+
+.tren {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 80px; /* Giảm độ cao xuống một chút cho thanh thoát */
+    background: var(--nen-thanh-tren);
+    border-bottom: 1px solid rgba(0, 242, 254, 0.2); /* Đường viền neon mờ */
+    z-index: 999;
+}
+
+.seto {
+    position: fixed; /* Cố định vị trí trên thanh header */
+    top: 18px;
+    left: 24px;
+    /* Không đặt kích thước để nó tự co giãn theo nút settings bên trong */
+}
+
+/* NÚT SETTING BÁNH RĂNG */
+.settings {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #1f2438, #0d111a);
+    border: 1px solid var(--mau-chu-dao);
+    border-radius: 50%;
+    color: var(--mau-chu-dao);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 0 12px rgba(0, 242, 254, 0.3);
+    font-size: 18px;
+    transition: all 0.3s ease;
+    
+    /* Đảm bảo làm gốc tọa độ cho menu con nằm ngay dưới nó */
+    position: relative; 
+}
+
+.settings:hover {
+    box-shadow: 0 0 20px rgba(0, 242, 254, 0.6);
+}
+
+/* MENU CÀI ĐẶT (Áp dụng theo cấu trúc HTML mới sát dưới nút) */
+.menusetting {
+
+    position: absolute;
+    top: 100%; /* Nằm ngay dưới cạnh dưới của .settings */
+    left: 0;
+    width: 180px;
+    margin-top: 10px; /* Khoảng cách từ nút tới menu */
+    background: rgba(26, 29, 41, 0.95);
+    border: 1px solid rgba(0, 242, 254, 0.4);
+    border-radius: 8px 8px;
+    color: var(--chu-chinh);
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    transition: 0.25s ease;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    
+    /* Bỏ các dòng reset cũ (text-align, justify-content...) vì giờ nó không bị ảnh hưởng bởi nút settings nữa */
+}
+
+.menusetting.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+/* Các mục nhỏ bên trong menu */
+.menusetting div {
+    width: 100%;
+    padding: 10px 16px;
+    border-radius: 0px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--chu-mo);
+    transition: background 0.2s;
+
+    background-image: linear-gradient(to right, transparent 50%, rgba(0, 242, 254, 0.15) 50%);
+    background-size: 200% 100%;
+    background-position: left bottom;
+    transition: background-position 0.4s ease-out, color 0.3s ease;
+}
+
+.menusetting div:hover {
+    background-position: right bottom;
+    
+    /* Đổi màu chữ sang màu chủ đạo */
+    color: var(--mau-chu-dao);
+    
+    /* Giữ nguyên vệt sáng lề trái nếu bạn thích (tùy chọn) */
+    border-left: 3px solid var(--mau-chu-dao); 
+    padding-left: 13px;
+}
+
+/* --- ĐỊNH DẠNG ICON BÁNH RĂNG --- */
+.settings .banhrang {
+    display: inline-block;      /* Bắt buộc phải có để transform tính toán đúng tâm, không bị dịch */
+    transform-origin: center;   /* Đảm bảo xoay chính xác từ tâm điểm của icon */
+    transition: transform 0.4s ease; /* Tạo hiệu ứng xoay mượt mà, không bị giật cục */
+}
+
+/* --- HIỆU ỨNG XOAY KHI HOVER VÀO NÚT SETTINGS --- */
+/* Viết như thế này giúp trải nghiệm mượt hơn: Chỉ cần đưa chuột vào vùng nút tròn là bánh răng sẽ xoay đều */
+.settings:hover .banhrang {
+    transform: rotate(50deg);   /* Tăng lên 90 độ để thấy hiệu ứng xoay rõ và đẹp mắt hơn */
+}
